@@ -6,7 +6,7 @@
 /*   By: tvachera <tvachera@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 15:16:24 by tvachera          #+#    #+#             */
-/*   Updated: 2021/09/21 14:19:31 by tvachera         ###   ########.fr       */
+/*   Updated: 2021/10/26 21:40:48 by tvachera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -595,8 +595,11 @@ namespace ft
 				try
 				{
 					node = m_node_alloc.allocate(1);
-					m_node_alloc.construct(node, node_type(value, color));
 					m_val_alloc.construct(&node->value, value);
+					node->color = color;
+					node->parent = NULL;
+					node->left = NULL;
+					node->right = NULL;
 				}
 				catch (std::exception & e)
 				{
@@ -796,8 +799,8 @@ namespace ft
     				m_root = v; 
     			else if (u == u->parent->left)
         			u->parent->left = v;
-    			else
-        			u->parent->right = v;
+				else
+					u->parent->right = v;
 				if (v)
 					v->parent = u->parent;
 			}
